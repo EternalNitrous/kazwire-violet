@@ -25,7 +25,7 @@ form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     try {
-        await registerSW();  // Assuming you have a separate function to handle this
+        await registerSW();  // Assuming you have a separate function for this
     } catch (err) {
         error.textContent = "Failed to register service worker.";
         errorCode.textContent = err.toString();
@@ -36,10 +36,10 @@ form.addEventListener("submit", async (event) => {
     location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
 });
 
-// This is where you put the Service Worker registration
+// Add the Service Worker registration here
 document.addEventListener('DOMContentLoaded', function() {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/static/uv.js') // Register the Service Worker
+        navigator.serviceWorker.register('/static/uv.js', { scope: '/static/' }) // Register the Service Worker with a scope
             .then(function(registration) {
                 console.log('Service Worker registered with scope:', registration.scope);
             })
