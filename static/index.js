@@ -34,3 +34,17 @@ form.addEventListener("submit", async (event) => {
   const url = search(address.value, searchEngine.value);
   location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/static/uv.js')
+          .then(function(registration) {
+              console.log('Service Worker registered with scope:', registration.scope);
+          })
+          .catch(function(error) {
+              console.error('Service Worker registration failed:', error);
+          });
+  } else {
+      console.log('Service Workers are not supported in this browser.');
+  }
+});
